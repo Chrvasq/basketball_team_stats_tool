@@ -13,9 +13,37 @@ def clean_data():
     return players_list
 
 
-def balance_team():
-    pass
+def split_experience_level(players_list):
+    experienced = []
+    inexperienced = []
+
+    for player in players_list:
+        if player['experience'] == True:
+            experienced.append(player)
+        else:
+            inexperienced.append(player)
+    return experienced, inexperienced
+
+
+# def balance_team(teams_list, players_list):
+#     total_num_teams = len(teams_list)
+#     total_num_players = len(players_list)
+#     team_split = total_num_players // total_num_teams
+#     team_dict = {}
+
+#     for index, player in enumerate(players_list):
+#         if index 
+#     print(team_dict)
+
+
+
+
+
+
+    
 
 
 if __name__ == '__main__':
     clean_data()
+    split_experience_level(players_list)
+    # balance_team(teams_list, players_list)
