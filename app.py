@@ -134,55 +134,77 @@ def welcome_message():
     print('#' * (len(welcome_message) + 2))
 
 
-def main_menu_display():
-    print('\n---- MAIN MENU ----\n')
-    print('Selection Options:')
-    for key, value in main_menu_options.items():
-        print(f' {key}) {value}')
+def menu_display(active_menu):
+    if active_menu == 1:
+        print('\n---- MAIN MENU ----\n')
+        print('Selection Options:')
+        for key, value in main_menu_options.items():
+            print(f' {key}) {value}')
+    elif active_menu == 2:
+        print('\n---- TEAM MENU ----\n')
+        print('Select Team:')
+        for key, value in team_menu_options.items():
+            print(f' {key}) {value}')
 
 
-def team_menu_display():
-    print('\n---- TEAM MENU ----\n')
-    print('Select Team:')
-    for key, value in team_menu_options.items():
-        print(f' {key}) {value}')
+# def team_menu_display():
+#     print('\n---- TEAM MENU ----\n')
+#     print('Select Team:')
+#     for key, value in team_menu_options.items():
+#         print(f' {key}) {value}')
 
 
-def get_user_input_main_menu():
+def get_user_input(active_menu):
     user_input = ''
 
-    try:
-        print('\n')
-        user_input = int(input('Enter an option > '))
-        if user_input not in main_menu_options.keys():
-            raise ValueError
-        else:
-            return user_input
-    except ValueError:
-        print('\n** Invalid input. Please enter a numeric option. **\n')
-        main_menu_display()
+    if active_menu == 1:
+        try:
+            print('\n')
+            user_input = int(input('Enter an option > '))
+            if user_input not in main_menu_options.keys():
+                raise ValueError
+            else:
+                return user_input
+        except ValueError:
+            print('\n** Invalid input. Please enter a numeric option. **\n')
+            menu_display(active_menu)
+    elif active_menu == 2:
+        try:
+            print('\n')
+            user_input = int(input('Enter an option > '))
+            if user_input not in team_menu_options.keys():
+                raise ValueError
+            else:
+                return user_input
+        except ValueError:
+            print('\n** Invalid input. Please enter a numeric option. **\n')
+            menu_display(active_menu)
 
 
 def main(active_menu=1):
     welcome_message()
-    main_menu_display()
+    menu_display(active_menu)
     
     while active_menu == 1:
-        choice = get_user_input_main_menu()
+        choice = get_user_input(active_menu)
         
         if choice is None:
             continue
         else:
             if choice == 1:
-                team_menu_display()
                 active_menu = 2
+                menu_display(active_menu)
             if choice == 2:
                 pass #TODO Add quit functionality
 
     while active_menu == 2:
-        print('team menu')
-        break
+        choice = get_user_input(active_menu)
 
+        if choice is None:
+            continue
+        else:
+            pass
+        pass
 
 if __name__ == '__main__':
     main()
