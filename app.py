@@ -1,11 +1,12 @@
 import constants
 from copy import deepcopy
+import sys
 
 teams_list = constants.TEAMS
 players_list = deepcopy(constants.PLAYERS)
 main_menu_options = {1: 'Display Team Stats', 2: 'Quit'}
 team_menu_options = {1: 'Panthers', 2: 'Bandits', 3: 'Warriors'}
-active_menu = 0
+navigation_menu_options = {1: 'Main Menu', 2: 'Team Menu', 3: 'Quit'}
 
 
 def clean_data(players):
@@ -123,8 +124,6 @@ def display_stats(team, teams_dict):
             else:
                 print(name, end=', ')
 
-    print('\n Press ENTER to continue... \n')
-
 
 def welcome_message():
     welcome_message = ' BASKETBALL TEAM STATS TOOL '
@@ -145,6 +144,11 @@ def menu_display(active_menu):
         print('Select Team:')
         for key, value in team_menu_options.items():
             print(f' {key}) {value}')
+    elif active_menu == 3:
+        print('\n---- NAVIGATION MENU ----\n')
+        print('Selectable Options:')
+        for key, value in navigation_menu_options.items():
+            print(f'{key}) {value}')
 
 
 def get_user_input(active_menu):
@@ -172,18 +176,25 @@ def get_user_input(active_menu):
         except ValueError:
             print('\n** Invalid input. Please enter a numeric option. **\n')
             menu_display(active_menu)
+    elif active_menu == 3:
+        try:
+            print('\n')
+            user_input = int(input('\n Enter an option > '))
+            if user_input not in navigation_menu_options.keys():
+                raise ValueError
+            else:
+                return user_input
+        except ValueError:
+            print('Invalid input. Please enter a numeric option.')
+            menu_display(active_menu)
 
 
 def main(active_menu=1):
-    data = clean_data(players_list) # Clean data
-    roster = balance_team(teams_list, data) # Create roster
-
-    welcome_message()
     menu_display(active_menu)
-    
+
     while active_menu == 1:
         choice = get_user_input(active_menu)
-        
+
         if choice is None:
             continue
         else:
@@ -191,7 +202,7 @@ def main(active_menu=1):
                 active_menu = 2
                 menu_display(active_menu)
             if choice == 2:
-                pass #TODO Add quit functionality
+                sys.exit()
 
     while active_menu == 2:
         choice = get_user_input(active_menu)
@@ -200,8 +211,25 @@ def main(active_menu=1):
             continue
         else:
             display_stats(team_menu_options[choice], roster)
+            active_menu = 3
+            menu_display(active_menu)
+
+    while active_menu == 3:
+        choice = get_user_input(active_menu)
+
+        if choice is None:
+            continue
+        else:
+            if choice == 1:
+                main(active_menu=1)
+            elif choice == 2:
+                main(active_menu=2)
+            elif choice == 3:
+                sys.exit()
+
 
 if __name__ == '__main__':
+    welcome_message()
+    data = clean_data(players_list)  # Clean data
+    roster = balance_team(teams_list, data)  # Create roster
     main()
-    # split_experience_level(clean_data(players_list))
-    # display_stats('Panthers', balance_team(teams_list, players_list))
