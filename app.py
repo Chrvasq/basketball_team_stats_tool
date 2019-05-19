@@ -3,6 +3,9 @@ from copy import deepcopy
 
 teams_list = constants.TEAMS
 players_list = deepcopy(constants.PLAYERS)
+main_menu_options = {1: 'Display Team Stats', 2: 'Quit'}
+team_menu_options = {1: 'Panthers', 2: 'Bandits', 3: 'Warriors'}
+active_menu = 0
 
 
 def clean_data(players):
@@ -123,6 +126,65 @@ def display_stats(team, teams_dict):
     print('\n Press ENTER to continue... \n')
 
 
+def welcome_message():
+    welcome_message = ' BASKETBALL TEAM STATS TOOL '
+    print('\n')
+    print('#' * (len(welcome_message) + 2))
+    print(f'#{welcome_message}#')
+    print('#' * (len(welcome_message) + 2))
+
+
+def main_menu_display():
+    print('\n---- MAIN MENU ----\n')
+    print('Selection Options:')
+    for key, value in main_menu_options.items():
+        print(f' {key}) {value}')
+
+
+def team_menu_display():
+    print('\n---- TEAM MENU ----\n')
+    print('Select Team:')
+    for key, value in team_menu_options.items():
+        print(f' {key}) {value}')
+
+
+def get_user_input_main_menu():
+    user_input = ''
+
+    try:
+        print('\n')
+        user_input = int(input('Enter an option > '))
+        if user_input not in main_menu_options.keys():
+            raise ValueError
+        else:
+            return user_input
+    except ValueError:
+        print('\n** Invalid input. Please enter a numeric option. **\n')
+        main_menu_display()
+
+
+def main(active_menu=1):
+    welcome_message()
+    main_menu_display()
+    
+    while active_menu == 1:
+        choice = get_user_input_main_menu()
+        
+        if choice is None:
+            continue
+        else:
+            if choice == 1:
+                team_menu_display()
+                active_menu = 2
+            if choice == 2:
+                pass #TODO Add quit functionality
+
+    while active_menu == 2:
+        print('team menu')
+        break
+
+
 if __name__ == '__main__':
-    split_experience_level(clean_data(players_list))
-    display_stats('Panthers', balance_team(teams_list, players_list))
+    main()
+    # split_experience_level(clean_data(players_list))
+    # display_stats('Panthers', balance_team(teams_list, players_list))
