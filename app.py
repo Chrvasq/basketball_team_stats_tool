@@ -58,9 +58,9 @@ def balance_team(teams, players):
 
 
 def display_stats(team, teams_dict):
-    print(f'\n Team: {team} Stats \n')
+    print(f'\nTeam: {team} Stats \n')
     print('-' * 30)
-    print(f'\n Total number of players: {len(teams_dict[team])} \n')
+    print(f'\nTotal number of players: {len(teams_dict[team])} \n')
     print('Roster:')
 
     # Print team roster
@@ -147,13 +147,6 @@ def menu_display(active_menu):
             print(f' {key}) {value}')
 
 
-# def team_menu_display():
-#     print('\n---- TEAM MENU ----\n')
-#     print('Select Team:')
-#     for key, value in team_menu_options.items():
-#         print(f' {key}) {value}')
-
-
 def get_user_input(active_menu):
     user_input = ''
 
@@ -182,6 +175,9 @@ def get_user_input(active_menu):
 
 
 def main(active_menu=1):
+    data = clean_data(players_list) # Clean data
+    roster = balance_team(teams_list, data) # Create roster
+
     welcome_message()
     menu_display(active_menu)
     
@@ -203,8 +199,7 @@ def main(active_menu=1):
         if choice is None:
             continue
         else:
-            pass
-        pass
+            display_stats(team_menu_options[choice], roster)
 
 if __name__ == '__main__':
     main()
