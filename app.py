@@ -54,10 +54,75 @@ def balance_team(teams, players):
     return teams_dict
 
 
-def display_stats():
-    pass
+def display_stats(team, teams_dict):
+    print(f'\n Team: {team} Stats \n')
+    print('-' * 30)
+    print(f'\n Total number of players: {len(teams_dict[team])} \n')
+    print('Roster:')
+
+    # Print team roster
+    for index, player in enumerate(teams_dict[team]):
+        if index != len(teams_dict[team]) - 1:
+            print(player['name'], end=', ')
+        else:
+            print(player['name'], '\n')
+
+    # Create experienced, inexperienced roster list
+    experienced = [player['name'] for player in teams_dict[team]
+                   if player['experience'] is True]
+
+    inexperienced = [player['name'] for player in teams_dict[team]
+                     if player['experience'] is not True]
+
+    # Print num of experienced players
+    print(f'Total number of experienced players: {len(experienced)} \n')
+    print('Experienced players:')
+
+    # Print experienced player names
+    for index, name in enumerate(experienced):
+        if index != len(experienced) - 1:
+            print(name, end=', ')
+        else:
+            print(name, '\n')
+
+    # Print num of inexperienced players
+    print(f'Total number of inexperienced players: {len(inexperienced)} \n')
+    print('Inexperienced players:')
+
+    # Print experienced player names
+    for index, name in enumerate(inexperienced):
+        if index != len(inexperienced) - 1:
+            print(name, end=', ')
+        else:
+            print(name, '\n')
+
+    # Calculate average height of team
+    team_height = [player['height'] for player in teams_dict[team]]
+    average_team_height = sum(team_height) / len(teams_dict[team])
+    feet = average_team_height // 12
+    inches = average_team_height % 12
+
+    # Print average height of team
+    print(f'Average height of the team: {feet:g} ft {inches} in \n')
+
+    # Create guardians list
+    guardians = [player['guardians'] for player in teams_dict[team]]
+
+    # Print guardians of team
+    print('Guardians:')
+    for index, guardian in enumerate(guardians):
+        for name_index, name in enumerate(guardian):
+            if index == len(guardians) - 1:
+                if name_index == len(guardian) - 1:
+                    print(name, '\n')
+                else:
+                    print(name, end=', ')
+            else:
+                print(name, end=', ')
+
+    print('\n Press ENTER to continue... \n')
 
 
 if __name__ == '__main__':
     split_experience_level(clean_data(players_list))
-    balance_team(teams_list, players_list)
+    display_stats('Panthers', balance_team(teams_list, players_list))
