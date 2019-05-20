@@ -89,6 +89,16 @@ def print_roster_by_experience_level(experienced, inexperienced):
             print(name, '\n')
 
 
+def average_team_height(team, teams_dict):
+    team_height = [player['height'] for player in teams_dict[team]]
+    average_team_height = sum(team_height) / len(teams_dict[team])
+    feet = average_team_height // 12
+    inches = average_team_height % 12
+
+    # Print average height of team
+    print(f'Average height of the team: {feet:g} ft {inches} in \n')
+
+
 def display_stats(team, teams_dict):
     print(f'\nTeam: {team} Stats \n')
     print('-' * 30)
@@ -109,13 +119,7 @@ def display_stats(team, teams_dict):
     print_roster_by_experience_level(experienced, inexperienced)
 
     # Calculate average height of team
-    team_height = [player['height'] for player in teams_dict[team]]
-    average_team_height = sum(team_height) / len(teams_dict[team])
-    feet = average_team_height // 12
-    inches = average_team_height % 12
-
-    # Print average height of team
-    print(f'Average height of the team: {feet:g} ft {inches} in \n')
+    average_team_height(team, teams_dict)
 
     # Create guardians list
     guardians = [player['guardians'] for player in teams_dict[team]]
