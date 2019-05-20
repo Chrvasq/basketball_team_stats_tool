@@ -59,6 +59,11 @@ def balance_team(teams, players):
 
 
 def print_team_roster(team, teams_dict):
+    print(f'\nTeam: {team} Stats \n')
+    print('-' * 30)
+    print(f'\nTotal number of players: {len(teams_dict[team])} \n')
+    print('Roster:')
+
     for index, player in enumerate(teams_dict[team]):
         if index != len(teams_dict[team]) - 1:
             print(player['name'], end=', ')
@@ -89,16 +94,6 @@ def print_roster_by_experience_level(experienced, inexperienced):
             print(name, '\n')
 
 
-def average_team_height(team, teams_dict):
-    team_height = [player['height'] for player in teams_dict[team]]
-    average_team_height = sum(team_height) / len(teams_dict[team])
-    feet = average_team_height // 12
-    inches = average_team_height % 12
-
-    # Print average height of team
-    print(f'Average height of the team: {feet:g} ft {inches} in \n')
-
-
 def print_guardian_list(team, teams_dict):
     # Create guardians list
     guardians = [player['guardians'] for player in teams_dict[team]]
@@ -116,13 +111,18 @@ def print_guardian_list(team, teams_dict):
                 print(name, end=', ')
 
 
-def display_stats(team, teams_dict):
-    print(f'\nTeam: {team} Stats \n')
-    print('-' * 30)
-    print(f'\nTotal number of players: {len(teams_dict[team])} \n')
-    print('Roster:')
+def average_team_height(team, teams_dict):
+    team_height = [player['height'] for player in teams_dict[team]]
+    average_team_height = sum(team_height) / len(teams_dict[team])
+    feet = average_team_height // 12
+    inches = average_team_height % 12
 
-    # Print team roster
+    # Print average height of team
+    print(f'Average height of the team: {feet:g} ft {inches} in \n')
+
+
+def display_stats(team, teams_dict):
+    # Print team roster stats
     print_team_roster(team, teams_dict)
 
     # Create experienced, inexperienced lists
@@ -140,6 +140,9 @@ def display_stats(team, teams_dict):
 
     # Print guardians of team
     print_guardian_list(team, teams_dict)
+
+    print('End of Report')
+    print('-' * 30)
 
 
 def welcome_message():
