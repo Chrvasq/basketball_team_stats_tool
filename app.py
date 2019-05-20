@@ -58,27 +58,15 @@ def balance_team(teams, players):
     return teams_dict
 
 
-def display_stats(team, teams_dict):
-    print(f'\nTeam: {team} Stats \n')
-    print('-' * 30)
-    print(f'\nTotal number of players: {len(teams_dict[team])} \n')
-    print('Roster:')
-
-    # Print team roster
+def print_team_roster(team, teams_dict):
     for index, player in enumerate(teams_dict[team]):
         if index != len(teams_dict[team]) - 1:
             print(player['name'], end=', ')
         else:
             print(player['name'], '\n')
 
-    # Create experienced, inexperienced roster list
-    experienced = [player['name'] for player in teams_dict[team]
-                   if player['experience'] is True]
 
-    inexperienced = [player['name'] for player in teams_dict[team]
-                     if player['experience'] is not True]
-
-    # Print num of experienced players
+def print_roster_by_experience_level(experienced, inexperienced):
     print(f'Total number of experienced players: {len(experienced)} \n')
     print('Experienced players:')
 
@@ -99,6 +87,26 @@ def display_stats(team, teams_dict):
             print(name, end=', ')
         else:
             print(name, '\n')
+
+
+def display_stats(team, teams_dict):
+    print(f'\nTeam: {team} Stats \n')
+    print('-' * 30)
+    print(f'\nTotal number of players: {len(teams_dict[team])} \n')
+    print('Roster:')
+
+    # Print team roster
+    print_team_roster(team, teams_dict)
+
+    # Create experienced, inexperienced lists
+    experienced = [player['name'] for player in teams_dict[team]
+                   if player['experience'] is True]
+
+    inexperienced = [player['name'] for player in teams_dict[team]
+                     if player['experience'] is not True]
+
+    # Print num of experienced players
+    print_roster_by_experience_level(experienced, inexperienced)
 
     # Calculate average height of team
     team_height = [player['height'] for player in teams_dict[team]]
