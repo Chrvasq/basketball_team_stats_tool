@@ -114,11 +114,11 @@ def print_guardian_list(team, teams_dict):
 def average_team_height(team, teams_dict):
     team_height = [player['height'] for player in teams_dict[team]]
     average_team_height = sum(team_height) / len(teams_dict[team])
-    feet = average_team_height // 12
-    inches = average_team_height % 12
+    feet = round(average_team_height // 12)
+    inches = round(average_team_height % 12)
 
     # Print average height of team
-    print(f'Average height of the team: {feet:g} ft {inches} in \n')
+    print(f'Average height of the team: {feet} ft {inches} in \n')
 
 
 def display_stats(team, teams_dict):
