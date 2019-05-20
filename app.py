@@ -1,19 +1,23 @@
-import constants
-from copy import deepcopy
+from constants import TEAMS, PLAYERS
 import sys
 
-teams_list = constants.TEAMS
-players_list = deepcopy(constants.PLAYERS)
+teams_list = TEAMS
+players_list = PLAYERS
 main_menu_options = {1: 'Display Team Stats', 2: 'Quit'}
 team_menu_options = {1: 'Panthers', 2: 'Bandits', 3: 'Warriors'}
 navigation_menu_options = {1: 'Main Menu', 2: 'Team Menu', 3: 'Quit'}
 
 
 def clean_data(players):
+    players_list = []
+
     for player in players:
-        player['guardians'] = player['guardians'].split(' and ')
-        player['experience'] = True if player['experience'] == 'YES' else False
-        player['height'] = int(player['height'][:2])
+        player_dict = {}
+        player_dict['name'] = player['name'] 
+        player_dict['guardians'] = player['guardians'].split(' and ')
+        player_dict['experience'] = True if player['experience'] == 'YES' else False
+        player_dict['height'] = int(player['height'][:2])
+        players_list.append(player_dict)
     return players_list
 
 
