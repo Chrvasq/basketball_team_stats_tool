@@ -99,6 +99,23 @@ def average_team_height(team, teams_dict):
     print(f'Average height of the team: {feet:g} ft {inches} in \n')
 
 
+def print_guardian_list(team, teams_dict):
+    # Create guardians list
+    guardians = [player['guardians'] for player in teams_dict[team]]
+
+    # Print guardians of team
+    print('Guardians:')
+    for index, guardian in enumerate(guardians):
+        for name_index, name in enumerate(guardian):
+            if index == len(guardians) - 1:
+                if name_index == len(guardian) - 1:
+                    print(name, '\n')
+                else:
+                    print(name, end=', ')
+            else:
+                print(name, end=', ')
+
+
 def display_stats(team, teams_dict):
     print(f'\nTeam: {team} Stats \n')
     print('-' * 30)
@@ -121,20 +138,8 @@ def display_stats(team, teams_dict):
     # Calculate average height of team
     average_team_height(team, teams_dict)
 
-    # Create guardians list
-    guardians = [player['guardians'] for player in teams_dict[team]]
-
     # Print guardians of team
-    print('Guardians:')
-    for index, guardian in enumerate(guardians):
-        for name_index, name in enumerate(guardian):
-            if index == len(guardians) - 1:
-                if name_index == len(guardian) - 1:
-                    print(name, '\n')
-                else:
-                    print(name, end=', ')
-            else:
-                print(name, end=', ')
+    print_guardian_list(team, teams_dict)
 
 
 def welcome_message():
