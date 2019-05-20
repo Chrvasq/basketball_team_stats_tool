@@ -1,5 +1,5 @@
 from constants import TEAMS, PLAYERS
-import sys
+from os import system, name, sys
 
 teams_list = TEAMS
 players_list = PLAYERS
@@ -61,6 +61,9 @@ def balance_team(teams, players):
 
     return teams_dict
 
+
+def clear_screen():
+    system('cls' if name == 'nt' else 'clear')
 
 def print_team_roster(team, teams_dict):
     print(f'\nTeam: {team} Stats \n')
