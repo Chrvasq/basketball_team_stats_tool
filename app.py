@@ -13,9 +13,10 @@ def clean_data(players):
 
     for player in players:
         player_dict = {}
-        player_dict['name'] = player['name'] 
+        player_dict['name'] = player['name']
         player_dict['guardians'] = player['guardians'].split(' and ')
-        player_dict['experience'] = True if player['experience'] == 'YES' else False
+        player_dict['experience'] = (True if player['experience'] == 'YES'
+                                     else False)
         player_dict['height'] = int(player['height'][:2])
         players_list.append(player_dict)
     return players_list
@@ -64,6 +65,7 @@ def balance_team(teams, players):
 
 def clear_screen():
     system('cls' if name == 'nt' else 'clear')
+
 
 def print_team_roster(team, teams_dict):
     print(f'\nTeam: {team} Stats \n')
@@ -154,7 +156,6 @@ def display_stats(team, teams_dict):
 
 def welcome_message():
     welcome_message = ' BASKETBALL TEAM STATS TOOL '
-    print('\n')
     print('#' * (len(welcome_message) + 2))
     print(f'#{welcome_message}#')
     print('#' * (len(welcome_message) + 2))
@@ -227,8 +228,10 @@ def main(active_menu=1):
         else:
             if choice == 1:
                 active_menu = 2
+                clear_screen()
                 menu_display(active_menu)
             if choice == 2:
+                clear_screen()
                 sys.exit()
 
     while active_menu == 2:
@@ -237,6 +240,7 @@ def main(active_menu=1):
         if choice is None:
             continue
         else:
+            clear_screen()
             display_stats(team_menu_options[choice], roster)
             active_menu = 3
             menu_display(active_menu)
@@ -248,14 +252,18 @@ def main(active_menu=1):
             continue
         else:
             if choice == 1:
+                clear_screen()
                 main(active_menu=1)
             elif choice == 2:
+                clear_screen()
                 main(active_menu=2)
             elif choice == 3:
+                clear_screen()
                 sys.exit()
 
 
 if __name__ == '__main__':
+    clear_screen()
     welcome_message()
     data = clean_data(players_list)  # Clean data
     roster = balance_team(teams_list, data)  # Create roster
