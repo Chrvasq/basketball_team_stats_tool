@@ -173,7 +173,7 @@ def menu_display(active_menu):
             print(f' {key}) {value}')
     elif active_menu == 3:
         print('\n---- NAVIGATION MENU ----\n')
-        print('Selectable Options:')
+        print('Selection Options:')
         for key, value in navigation_menu_options.items():
             print(f'{key}) {value}')
 
@@ -187,8 +187,7 @@ def get_user_input(active_menu):
             user_input = int(input('Enter an option > '))
             if user_input not in main_menu_options.keys():
                 raise ValueError
-            else:
-                return user_input
+            return user_input
         except ValueError:
             print('\n** Invalid input. Please enter a numeric option. **\n')
             menu_display(active_menu)
@@ -198,8 +197,7 @@ def get_user_input(active_menu):
             user_input = int(input('Enter an option > '))
             if user_input not in team_menu_options.keys():
                 raise ValueError
-            else:
-                return user_input
+            return user_input
         except ValueError:
             print('\n** Invalid input. Please enter a numeric option. **\n')
             menu_display(active_menu)
@@ -209,8 +207,7 @@ def get_user_input(active_menu):
             user_input = int(input('\n Enter an option > '))
             if user_input not in navigation_menu_options.keys():
                 raise ValueError
-            else:
-                return user_input
+            return user_input
         except ValueError:
             print('Invalid input. Please enter a numeric option.')
             menu_display(active_menu)
@@ -229,7 +226,7 @@ def main(active_menu=1):
                 active_menu = 2
                 clear_screen()
                 menu_display(active_menu)
-            if choice == 2:
+            elif choice == 2:
                 clear_screen()
                 sys.exit()
 
