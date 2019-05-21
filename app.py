@@ -68,7 +68,7 @@ def clear_screen():
 
 
 def print_team_roster(team, teams_dict):
-    print(f'\nTeam: {team} Stats \n')
+    print(f'\nTeam: {team}\n')
     print('-' * 30)
     print(f'\nTotal number of players: {len(teams_dict[team])} \n')
     print('Roster:')
@@ -150,7 +150,6 @@ def display_stats(team, teams_dict):
     # Print guardians of team
     print_guardian_list(team, teams_dict)
 
-    print('End of Report')
     print('-' * 30)
 
 
