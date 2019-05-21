@@ -2,11 +2,11 @@ from constants import TEAMS, PLAYERS
 from os import system, name, sys
 
 # ANSI escape sequence variables to add color
-GREEN = '\033[1;92m' # Bold and green
-YELLOW = '\033[1;93m' # Bold and yellow
-RED = '\033[1;91m' # Bold and red
-UNDERLINE = '\033[4m' 
-ENDC = '\033[0m'
+GREEN = '\033[1;92m'  # Bold and green
+YELLOW = '\033[1;93m'  # Bold and yellow
+RED = '\033[1;91m'  # Bold and red
+UNDERLINE = '\033[4m'  # Add underline
+END = '\033[0m'  # Reset formatting
 
 teams_list = TEAMS
 players_list = PLAYERS
@@ -75,8 +75,8 @@ def clear_screen():
 
 
 def print_team_roster(team, teams_dict):
-    print('\nTeam: ' + GREEN + f'{team}\n' + ENDC)
-    print(RED + '-' * 30 + ENDC)
+    print('\nTeam: ' + GREEN + f'{team}\n' + END)
+    print(RED + '-' * 30 + END)
     print(f'\nTotal number of players: {len(teams_dict[team])} \n')
     print('Roster:')
 
@@ -157,7 +157,7 @@ def display_stats(team, teams_dict):
     # Print guardians of team
     print_guardian_list(team, teams_dict)
 
-    print(RED + '-' * 30 + ENDC)
+    print(RED + '-' * 30 + END)
 
 
 def welcome_message():
@@ -169,18 +169,18 @@ def welcome_message():
 
 def menu_display(active_menu):
     if active_menu == 1:
-        print(YELLOW + '\n---- MAIN MENU ----\n' + ENDC)
-        print(UNDERLINE + 'Selection Options:' + ENDC)
+        print(YELLOW + '\n---- MAIN MENU ----\n' + END)
+        print(UNDERLINE + 'Selection Options:' + END)
         for key, value in main_menu_options.items():
             print(f' {key}) {value}')
     elif active_menu == 2:
-        print(RED + '\n---- TEAM MENU ----\n' + ENDC)
-        print(UNDERLINE + 'Select Team:' + ENDC)
+        print(RED + '\n---- TEAM MENU ----\n' + END)
+        print(UNDERLINE + 'Select Team:' + END)
         for key, value in team_menu_options.items():
             print(f' {key}) {value}')
     elif active_menu == 3:
-        print(GREEN + '\n---- NAVIGATION MENU ----\n' + ENDC)
-        print(UNDERLINE + 'Selection Options:' + ENDC)
+        print(GREEN + '\n---- NAVIGATION MENU ----\n' + END)
+        print(UNDERLINE + 'Select Menu:' + END)
         for key, value in navigation_menu_options.items():
             print(f'{key}) {value}')
 
@@ -188,12 +188,13 @@ def menu_display(active_menu):
 def get_user_input(active_menu):
     user_input = ''
     error_message = '\n** Invalid input. Please enter a numeric option. **\n'
-    error_message = YELLOW + error_message + ENDC # Add formatting to message
+    error_message = YELLOW + error_message + END  # Add formatting to message
+    prompt = YELLOW + 'Enter an option > ' + END
 
     if active_menu == 1:
         try:
             print('\n')
-            user_input = int(input('Enter an option > '))
+            user_input = int(input(prompt))
             if user_input not in main_menu_options.keys():
                 raise ValueError
             return user_input
@@ -203,7 +204,7 @@ def get_user_input(active_menu):
     elif active_menu == 2:
         try:
             print('\n')
-            user_input = int(input('Enter an option > '))
+            user_input = int(input(prompt))
             if user_input not in team_menu_options.keys():
                 raise ValueError
             return user_input
@@ -213,7 +214,7 @@ def get_user_input(active_menu):
     elif active_menu == 3:
         try:
             print('\n')
-            user_input = int(input('\n Enter an option > '))
+            user_input = int(input(prompt))
             if user_input not in navigation_menu_options.keys():
                 raise ValueError
             return user_input
