@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 from constants import TEAMS, PLAYERS
 from os import system, name, sys
 
@@ -225,38 +227,26 @@ def get_user_input(active_menu):
 
 def main(active_menu=1):
     menu_display(active_menu)
+    running = True
 
-    while active_menu == 1:
+    while running:
         choice = get_user_input(active_menu)
 
         if choice is None:
             continue
-        else:
+        
+        if active_menu == 1:
             if choice == 1:
-                active_menu = 2
                 clear_screen()
-                menu_display(active_menu)
+                main(active_menu=2)
             elif choice == 2:
                 clear_screen()
                 sys.exit()
-
-    while active_menu == 2:
-        choice = get_user_input(active_menu)
-
-        if choice is None:
-            continue
-        else:
+        elif active_menu == 2:
             clear_screen()
             display_stats(team_menu_options[choice], roster)
-            active_menu = 3
-            menu_display(active_menu)
-
-    while active_menu == 3:
-        choice = get_user_input(active_menu)
-
-        if choice is None:
-            continue
-        else:
+            main(active_menu=3)
+        elif active_menu == 3:
             if choice == 1:
                 clear_screen()
                 main(active_menu=1)
