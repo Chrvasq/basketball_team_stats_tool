@@ -45,29 +45,17 @@ def split_experience_level(players):
 
 def balance_team(teams, players):
     experienced, inexperienced = split_experience_level(players)
-    experience_split_value = len(experienced) // len(teams)
-    panthers, bandits, warriors = [], [], []
-    roster_list = [panthers, bandits, warriors]
+    team_list = [[] for _ in range(len(teams))]
 
     for index, player in enumerate(experienced):
-        if index < experience_split_value:
-            panthers.append(player)
-        if (index >= experience_split_value and
-                index < experience_split_value * 2):
-            bandits.append(player)
-        if index >= experience_split_value * 2:
-            warriors.append(player)
+        team_number = index % len(teams)
+        team_list[team_number].append(player)
 
     for index, player in enumerate(inexperienced):
-        if index < experience_split_value:
-            panthers.append(player)
-        if (index >= experience_split_value and
-                index < experience_split_value * 2):
-            bandits.append(player)
-        if index >= experience_split_value * 2:
-            warriors.append(player)
+        team_number = index % len(teams)
+        team_list[team_number].append(player)
 
-    teams_dict = {team: roster_list[index] for index, team in enumerate(teams)}
+    teams_dict = {team: team_list[index] for index, team in enumerate(teams)}
 
     return teams_dict
 
@@ -234,7 +222,7 @@ def main(active_menu=1):
 
         if choice is None:
             continue
-        
+
         if active_menu == 1:
             if choice == 1:
                 clear_screen()
