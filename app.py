@@ -18,6 +18,14 @@ navigation_menu_options = {1: 'Main Menu', 2: 'Team Menu', 3: 'Quit'}
 
 
 def clean_data(players):
+    """Creates a new dictionary and performs data transformations
+    
+    Arguments:
+        players {list} -- list of dictionaries with player information
+    
+    Returns:
+        dict -- dictionary with transformed data values
+    """
     players_list = []
 
     for player in players:
@@ -32,6 +40,14 @@ def clean_data(players):
 
 
 def split_experience_level(players):
+    """Creates two lists based on experience level
+    
+    Arguments:
+        players {list} -- list of dictionaries with player information
+    
+    Returns:
+        list -- lists of experienced/inexperienced players
+    """
     experienced = []
     inexperienced = []
 
@@ -44,6 +60,15 @@ def split_experience_level(players):
 
 
 def balance_team(teams, players):
+    """Creates a new dictionary with player roster split by experience level
+    
+    Arguments:
+        teams {list} -- list of teams
+        players {list} -- list of dictionaries with player information
+    
+    Returns:
+        [type] -- [description]
+    """
     experienced, inexperienced = split_experience_level(players)
     team_list = [[] for _ in range(len(teams))]
 
@@ -65,6 +90,12 @@ def clear_screen():
 
 
 def print_team_roster(team, teams_dict):
+    """Prints team roster
+    
+    Arguments:
+        team {str} -- team name
+        teams_dict {dict} -- dictionary of player information
+    """
     print('\nTeam: ' + GREEN + f'{team}\n' + END)
     print(RED + '-' * 30 + END)
     print(f'\nTotal number of players: {len(teams_dict[team])} \n')
@@ -78,6 +109,12 @@ def print_team_roster(team, teams_dict):
 
 
 def print_roster_by_experience_level(experienced, inexperienced):
+    """Prints player names by experience level
+    
+    Arguments:
+        experienced {list} -- list of experienced players
+        inexperienced {list} -- list of inexperienced players
+    """
     print(f'Total number of experienced players: {len(experienced)} \n')
     print('Experienced players:')
 
@@ -101,6 +138,12 @@ def print_roster_by_experience_level(experienced, inexperienced):
 
 
 def print_guardian_list(team, teams_dict):
+    """Prints guardians of players
+    
+    Arguments:
+        team {str} -- team name
+        teams_dict {dict} -- dictionary of player information
+    """
     # Create guardians list
     guardians = [player['guardians'] for player in teams_dict[team]]
 
@@ -118,6 +161,12 @@ def print_guardian_list(team, teams_dict):
 
 
 def average_team_height(team, teams_dict):
+    """Calculates and prints average team height
+    
+    Arguments:
+        team {str} -- team name
+        teams_dict {dict} -- dictionary of player information
+    """
     team_height = [player['height'] for player in teams_dict[team]]
     average_team_height = sum(team_height) / len(teams_dict[team])
     feet = round(average_team_height // 12)
@@ -128,6 +177,12 @@ def average_team_height(team, teams_dict):
 
 
 def display_stats(team, teams_dict):
+    """Displays team stats based on team name
+    
+    Arguments:
+        team {str} -- team name
+        teams_dict {dict} -- dictionary of player information
+    """
     # Print team roster stats
     print_team_roster(team, teams_dict)
 
@@ -158,6 +213,11 @@ def welcome_message():
 
 
 def menu_display(active_menu):
+    """Determines which menu to display
+    
+    Arguments:
+        active_menu {int} -- integer between 1 and 3
+    """
     if active_menu == 1:
         print(YELLOW + '\n---- MAIN MENU ----\n' + END)
         print(UNDERLINE + 'Selection Options:' + END)
@@ -176,6 +236,19 @@ def menu_display(active_menu):
 
 
 def get_user_input(active_menu):
+    """Prompts user for input
+    
+    Arguments:
+        active_menu {int} -- integer between 1 and 3
+    
+    Raises:
+        ValueError: user_input not in menu options
+        ValueError: user_input not in menu options
+        ValueError: user_input not in menu options
+    
+    Returns:
+        int -- integer based on menu option
+    """
     user_input = ''
     error_message = '\n** Invalid input. Please enter a numeric option. **\n'
     error_message = YELLOW + error_message + END  # Add formatting to message
@@ -214,6 +287,11 @@ def get_user_input(active_menu):
 
 
 def main(active_menu=1):
+    """Main function that handles main loop
+    
+    Keyword Arguments:
+        active_menu {int} -- integer bwteeen 1 and 3 (default: {1})
+    """
     menu_display(active_menu)
     running = True
 
